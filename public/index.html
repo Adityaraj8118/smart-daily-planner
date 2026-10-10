@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Daily Planner</title>
+  <meta name="theme-color" content="#1f8a5b">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container" id="app" hidden>
+    <!-- Account bar -->
+    <div class="account-bar">
+      <p class="account-name">Hi, <strong id="userName"></strong> <span class="muted" id="userHandle"></span></p>
+      <div class="account-actions">
+        <button type="button" class="btn btn-secondary" id="notifyBtn">Enable notifications</button>
+        <button type="button" class="btn btn-secondary" id="logoutBtn">Log out</button>
+      </div>
+    </div>
+    <p id="notifyMessage" class="form-message" role="status" aria-live="polite"></p>
+
+    <!-- Header -->
+    <header class="app-header">
+      <div>
+        <h1>Smart Daily Planner</h1>
+        <p class="subtitle">Plan your day, track deadlines, stay on top of things.</p>
+      </div>
+      <p class="current-date" id="currentDate" aria-live="polite"></p>
+    </header>
+
+    <!-- Statistics -->
+    <section class="stats" aria-label="Task summary">
+      <div class="stat-card">
+        <span class="stat-label">Total Tasks</span>
+        <span class="stat-value" id="statTotal">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Pending</span>
+        <span class="stat-value stat-pending" id="statPending">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Completed</span>
+        <span class="stat-value stat-completed" id="statCompleted">0</span>
+      </div>
+    </section>
+
+    <!-- Add task form -->
+    <section class="card" aria-labelledby="addTaskHeading">
+      <h2 id="addTaskHeading">Add a task</h2>
+      <form id="taskForm" class="task-form" novalidate>
+        <div class="field field-title">
+          <label for="taskTitle">Task title</label>
+          <input type="text" id="taskTitle" name="title" maxlength="200"
+                 placeholder="e.g. Call the supplier" autocomplete="off"
+                 aria-describedby="formMessage">
+        </div>
+        <div class="field field-date">
+          <label for="taskDeadline">Deadline <span class="optional">(optional)</span></label>
+          <input type="date" id="taskDeadline" name="deadline">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Task</button>
+      </form>
+      <p id="formMessage" class="form-message" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- Task list -->
+    <section class="card" aria-labelledby="taskListHeading">
+      <div class="list-header">
+        <h2 id="taskListHeading">Your tasks</h2>
+        <div class="filters" role="group" aria-label="Filter tasks">
+          <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="filter-btn" data-filter="pending" aria-pressed="false">Pending</button>
+          <button type="button" class="filter-btn" data-filter="completed" aria-pressed="false">Completed</button>
+        </div>
+      </div>
+
+      <ul id="taskList" class="task-list" aria-live="polite"></ul>
+      <p id="emptyState" class="empty-state" hidden></p>
+    </section>
+
+    <footer class="app-footer">
+      <p id="storageNote">
+        Tasks are saved to your account, so you can see them on any device you log in from.
+      </p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

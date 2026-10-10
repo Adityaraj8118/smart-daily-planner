@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log in — Smart Daily Planner</title>
+  <meta name="theme-color" content="#1f8a5b">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+  <main class="auth-wrap">
+    <div class="auth-brand">
+      <h1>Smart Daily Planner</h1>
+      <p class="subtitle">Log in to see your tasks on any device.</p>
+    </div>
+
+    <section class="card auth-card">
+      <div class="auth-tabs" role="tablist" aria-label="Account">
+        <button type="button" class="filter-btn active" role="tab" id="tabLogin"
+                aria-selected="true" aria-controls="loginForm">Log in</button>
+        <button type="button" class="filter-btn" role="tab" id="tabSignup"
+                aria-selected="false" aria-controls="signupForm">Create account</button>
+      </div>
+
+      <!-- Login -->
+      <form id="loginForm" class="auth-form" role="tabpanel" aria-labelledby="tabLogin" novalidate>
+        <div class="field">
+          <label for="loginId">Email or username</label>
+          <input type="text" id="loginId" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Log in</button>
+      </form>
+
+      <!-- Sign up, step 1 -->
+      <form id="signupForm" class="auth-form" role="tabpanel" aria-labelledby="tabSignup" hidden novalidate>
+        <div class="field">
+          <label for="signupName">Your name</label>
+          <input type="text" id="signupName" autocomplete="name" maxlength="60" required>
+        </div>
+        <div class="field">
+          <label for="signupEmail">Email</label>
+          <input type="email" id="signupEmail" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="signupPassword">Password <span class="optional">(min. 8 characters)</span></label>
+          <input type="password" id="signupPassword" autocomplete="new-password" minlength="8" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Send verification code</button>
+      </form>
+
+      <!-- Sign up, step 2: OTP -->
+      <form id="otpForm" class="auth-form" hidden novalidate>
+        <p class="otp-info">We sent a 6-digit code to <strong id="otpEmail"></strong>.</p>
+        <div class="field">
+          <label for="otpCode">Verification code</label>
+          <input type="text" id="otpCode" inputmode="numeric" autocomplete="one-time-code"
+                 maxlength="6" pattern="\d{6}" class="otp-input" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Verify &amp; create account</button>
+        <div class="otp-actions">
+          <button type="button" class="link-btn" id="resendBtn">Resend code</button>
+          <button type="button" class="link-btn" id="changeEmailBtn">Change email</button>
+        </div>
+      </form>
+
+      <p id="authMessage" class="form-message" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <script src="auth.js"></script>
+</body>
+</html>
